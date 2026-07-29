@@ -5,6 +5,7 @@ from src import calculations_co2 as calc
 from src import plotting as pl
 from src import saving as save
 import os
+import shutil
 
 os.makedirs("figures", exist_ok=True)
 os.makedirs("data/output_data", exist_ok=True)
@@ -70,6 +71,7 @@ pl.plotting_total_accuracy(co2_calculated_oil_kt[["total_oil_products"]], co2_ca
 
 pl.plot_short_time_gas(co2_calculated_gas_kt)
 pl.plot_short_time_oil(co2_calculated_oil_kt[["total_oil_products"]])
+pl.plot_short_time_oil_and_gas(co2_calculated_gas_kt, co2_calculated_oil_kt[["total_oil_products"]])
 pl.plot_short_time_int_aviation(co2_calculated_int_aviation_kt)
 pl.plot_short_time_together(co2_calculated_gas_kt, co2_calculated_oil_kt, co2_calculated_int_aviation_kt)
 
@@ -101,3 +103,12 @@ oil_and_gas_difference = pl.creating_difference_crt_and_calculations_yearly(pl.s
 print(f"Sum of Oil Products and Natural Gas CO2 difference from CRT in percent:\n{abs(oil_and_gas_difference).describe()}")
 int_aviation_difference = pl.creating_difference_crt_and_calculations_yearly(co2_calculated_int_aviation_kt, co2_int_aviation_yearly_crt_kt)
 print(f"International Aviation CO2 difference from CRT in percent:\n{abs(int_aviation_difference).describe()}")
+
+
+shutil.copy("index.html", "co2-emissions-tracker/index.html")
+shutil.copytree(
+    "figures",
+    "co2-emissions-tracker/figures",
+    dirs_exist_ok=True  # Python 3.8+
+)
+

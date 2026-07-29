@@ -268,6 +268,10 @@ def plot_short_time_gas(co2_calculated_gas):
 def plot_short_time_oil(co2_calculated_oil_total):
     plot_months_of_year_complete(co2_calculated_oil_total, "Oil Products", "Eurostat and Austria's NID/CRT 2026", "oil")
 
+def plot_short_time_oil_and_gas(co2_calculated_gas, co2_calculated_oil_total):
+    oil_and_gas = co2_calculated_gas.join(co2_calculated_oil_total, how="inner").sum(axis=1).to_frame(name="oil_and_gas")
+    plot_months_of_year_complete(oil_and_gas, "Oil Products and Natural Gas", "E-Control, Eurostat and Austria's NID/CRT 2026", "oil_and_gas")
+
 def plot_short_time_int_aviation(co2_calculated_int_aviation):
     plot_months_of_year_complete(co2_calculated_int_aviation, "International Aviation", "Eurostat and Austria's NID/CRT 2026", "int_aviation")
 

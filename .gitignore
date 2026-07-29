@@ -1,3 +1,5 @@
 .venv/
 __pycache__/
-playground/
+playground/# pixi environments
+.pixi/*
+!.pixi/config.toml
